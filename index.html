@@ -1,0 +1,324 @@
+<title>Oltinkolliklar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --border: #e2e8f0;
+    --fg: #0f172a;
+    --muted: #64748b;
+    --brand: #0369a1;
+    --brand-fg: #ffffff;
+    --accent: #f59e0b;
+    --accent-fg: #0f172a;
+    --hero: #0f172a;
+    --hero-fg: #ffffff;
+    --hero-muted: #cbd5e1;
+    --hero-eyebrow: #38bdf8;
+    --chip-border: #334155;
+    --band: #0369a1;
+    --foot: #0f172a;
+    --foot-fg: #cbd5e1;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1220; --surface: #111a2e; --border: #1e2b45; --fg: #f1f5f9; --muted: #94a3b8;
+      --brand: #38bdf8; --brand-fg: #06223a; --hero: #070d1a; --band: #075985; --foot: #070d1a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1220; --surface: #111a2e; --border: #1e2b45; --fg: #f1f5f9; --muted: #94a3b8;
+    --brand: #38bdf8; --brand-fg: #06223a; --hero: #070d1a; --band: #075985; --foot: #070d1a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: var(--sans); font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 30; background: var(--bg);
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .wrap {
+    max-width: 1080px; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  .top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .logo svg { width: 28px; height: 32px; flex: none; }
+  nav { display: flex; align-items: center; gap: 22px; }
+  nav a.link { font-size: 14px; font-weight: 500; }
+  nav a.link:hover { color: var(--brand); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 0; border-radius: 10px; padding: 10px 16px; font-weight: 600; font-size: 14px;
+    background: var(--brand); color: var(--brand-fg);
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.amber { background: var(--accent); color: var(--accent-fg); padding: 0 24px; font-size: 15px; font-weight: 700; }
+  .btn.white { background: #fff; color: #0f172a; padding: 14px 22px; font-size: 15px; }
+
+  .hero {
+    background: var(--hero); color: var(--hero-fg);
+    margin-top: 0;
+  }
+  .hero .wrap { padding-block: 64px 56px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--hero-eyebrow); margin: 0 0 18px; }
+  h1 { margin: 0; font-size: clamp(32px, 6vw, 48px); line-height: 1.1; font-weight: 800; letter-spacing: -0.025em; text-wrap: balance; max-width: 15em; }
+  .lead { margin: 18px 0 0; color: var(--hero-muted); font-size: 17px; max-width: 40em; }
+  .search { display: flex; gap: 12px; margin-top: 30px; max-width: 760px; }
+  .search input {
+    flex: 1; min-width: 0; height: 52px; border-radius: 12px; border: 0; padding: 0 18px;
+    font: inherit; font-size: 16px; background: #fff; color: #0f172a;
+  }
+  .search input::placeholder { color: #64748b; }
+  .search .btn { height: 52px; border-radius: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .chip {
+    background: transparent; border: 1px solid var(--chip-border); color: var(--hero-fg);
+    border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 600;
+  }
+  .chip:hover { border-color: var(--hero-eyebrow); }
+
+  section.block { padding-block: 56px; }
+  h2 { margin: 0 0 24px; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .card {
+    text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; display: flex; flex-direction: column; gap: 6px; min-width: 0;
+    transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: var(--brand); transform: translateY(-2px); }
+  .card[aria-pressed="true"] { border-color: var(--brand); box-shadow: 0 0 0 2px var(--brand) inset; }
+  .ico { width: 44px; height: 44px; border-radius: 10px; background: var(--brand); color: var(--brand-fg); display: grid; place-items: center; margin-bottom: 10px; }
+  .ico svg { width: 22px; height: 22px; }
+  .card h3 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -0.005em; }
+  .card p { margin: 0; font-size: 13px; color: var(--muted); }
+
+  #results { margin-top: 28px; scroll-margin-top: 88px; }
+  .panel { border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 22px; }
+  .panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px; margin-bottom: 14px; }
+  .panel-head h3 { margin: 0; font-size: 18px; font-weight: 700; }
+  .panel-head button { background: none; border: 0; color: var(--brand); font-weight: 600; font-size: 14px; padding: 0; }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+  .item b { display: block; font-size: 15px; }
+  .item span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .item .tel { display: inline-block; margin-top: 8px; font-weight: 700; font-size: 20px; color: var(--brand); font-variant-numeric: tabular-nums; }
+  .item .tag { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--muted); border: 1px dashed var(--border); border-radius: 999px; padding: 2px 10px; }
+  .empty { margin: 0; color: var(--muted); }
+  .empty a { color: var(--brand); font-weight: 600; }
+
+  .band { background: var(--band); color: #fff; }
+  .band .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 44px; flex-wrap: wrap; }
+  .band h2 { color: #fff; margin: 0 0 6px; font-size: 26px; }
+  .band p { margin: 0; color: #e0f2fe; font-size: 15px; max-width: 34em; }
+
+  footer { background: var(--foot); color: var(--foot-fg); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-block: 24px; }
+  footer .wrap { padding-bottom: calc(24px); }
+
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } nav a.link { display: none; } }
+  @media (max-width: 520px) {
+    .hero .wrap { padding-block: 44px 40px; }
+    .search { flex-direction: column; }
+    .search .btn { width: 100%; }
+    h2 { font-size: 24px; }
+    .band .btn { width: 100%; }
+  }
+  @media (max-width: 380px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Oltinkolliklar bosh sahifa">
+      <svg viewBox="0 0 28 32" fill="none" aria-hidden="true">
+        <path d="M14 1C7 1 1.5 6.3 1.5 12.8c0 8.4 10.2 17.2 11.7 18.4.5.4 1.1.4 1.6 0 1.5-1.2 11.7-10 11.7-18.4C26.5 6.3 21 1 14 1Z" fill="#0369a1"/>
+        <path d="M7.5 13c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4M7.5 17c2 0 2-1.4 4-1.4s2 1.4 4 1.4 2-1.4 4-1.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M8 9.2h12" stroke="#f59e0b" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      Oltinkolliklar
+    </a>
+    <nav>
+      <a class="link" href="#bolimlar" data-go="kafe">Kafelar</a>
+      <a class="link" href="#bolimlar" data-go="kommunal">Kommunal</a>
+      <a class="link" href="#bolimlar" data-go="usta">Ustalar</a>
+      <a class="link" href="#bolimlar" data-go="bozor">Bozor</a>
+      <a class="btn tg" href="#" target="_blank" rel="noopener">Telegram bot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Oltinko'l tumani portali</p>
+      <h1>Kerakli xizmat va raqamni 3 soniyada toping</h1>
+      <p class="lead">Tumandagi kafe, kommunal xizmat, usta va e'lonlar bitta joyda. Kuniga 24 soat ochiq.</p>
+      <form class="search" id="searchForm" role="search">
+        <input id="q" type="search" placeholder="Masalan: santexnik, kafe, taksi" autocomplete="off" aria-label="Qidiruv">
+        <button class="btn amber" type="submit">Qidirish</button>
+      </form>
+      <div class="chips">
+        <button class="chip" type="button" data-q="Tez yordam 103">Tez yordam 103</button>
+        <button class="chip" type="button" data-q="Taksi">Taksi</button>
+        <button class="chip" type="button" data-q="aptekalar">24/7 aptekalar</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="bolimlar">
+    <div class="wrap">
+      <h2>Asosiy bo'limlar</h2>
+      <div class="grid" id="grid"></div>
+      <div id="results" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <div>
+        <h2>Telegram ichida ham, telefon ekranida ham</h2>
+        <p>Botni oching yoki saytni telefon ish stoliga o'rnating, ilovasiz va yuklanishsiz.</p>
+      </div>
+      <a class="btn white tg" href="#" target="_blank" rel="noopener">Telegram botni ochish</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Oltinkolliklar, 2026</span>
+    <span>Savol va takliflar: <span id="contact">[SIZNING KONTAKTINGIZ]</span></span>
+  </div>
+</footer>
+
+<script>
+  var TELEGRAM_URL = "https://t.me/";
+  var CONTACT = "[SIZNING KONTAKTINGIZ]";
+
+  var I = {
+    food: '<path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8a2 2 0 0 1-2 2M9 3v6M17 21V3c-2.2 1.2-3.5 3.8-3.5 7v3h3.5"/>',
+    bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+    sani: '<circle cx="12" cy="5" r="2"/><path d="M12 9v6m-4-3 4-3 4 3M10 22v-5m4 5v-5"/>',
+    bag: '<path d="M6 8h12l-1 12H7L6 8ZM9 8V6a3 3 0 0 1 6 0v2"/>',
+    taxi: '<path d="M7 17h10M5 17v-4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M7 20v-3m10 3v-3M9 10V6h6v4"/>',
+    tool: '<path d="m14 6 4 4M4 20l9-9m2-7a4 4 0 0 1 5 5l-3 3-5-5 3-3Z"/>',
+    job: '<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>'
+  };
+  function icon(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + I[n] + '</svg>'; }
+
+  var CATS = [
+    { id: "kafe", icon: "food", title: "Oshxona va kafelar", desc: "Menyu, telefon, yetkazib berish va lokatsiya.", kw: "kafe restoran choyxona fastfud yetkazib berish menyu ovqat",
+      items: [["Kafe va restoranlar", "Menyu, ish vaqti, yetkazib berish"], ["Choyxonalar", "To'y va oshlar uchun joylar"], ["Fastfud va somsaxonalar", "Tez buyurtma"]] },
+    { id: "kommunal", icon: "bolt", title: "Kommunal va raqamlar", desc: "ETK, gaz, suv dispetcherlari va to'lov havolalari.", kw: "etk elektr gaz suv dispetcher to'lov kommunal svet",
+      items: [["Elektr tarmoqlari", "Dispetcher va avariya xizmati"], ["Gaz xizmati", "Avariya: 104", "104"], ["Suv ta'minoti", "Dispetcher va to'lovlar"]] },
+    { id: "sanit", icon: "sani", title: "Sanitariya va xizmatlar", desc: "Hojatxonalar, avtomoyka va sartaroshxonalar.", kw: "hojatxona avtomoyka moyka sartaroshxona soch xizmat",
+      items: [["Avtomoykalar", "Manzil va narxlar"], ["Sartaroshxonalar", "Erkaklar va ayollar zali"], ["Jamoat hojatxonalari", "Joylashuv xaritasi"]] },
+    { id: "bozor", icon: "bag", title: "Olti Soti Bozor", desc: "Mahalliy buyumlar, mashina va e'lonlar.", kw: "bozor e'lon mashina sotiladi sotuv savdo",
+      items: [["Mahalliy e'lonlar", "Sotiladi va olinadi"], ["Avtomobillar", "Mashina e'lonlari"], ["Ko'chmas mulk", "Uy va yer e'lonlari"]] },
+    { id: "taksi", icon: "taxi", title: "Taksi va kirakash", desc: "Toshkent–Oltinko'l va ichki yo'nalishlar.", kw: "taksi kirakash toshkent yo'nalish transport mashina",
+      items: [["Toshkent–Oltinko'l", "Kunlik reyslar"], ["Tuman ichida taksi", "Tezkor chaqiruv"], ["Yuk tashish", "Gazel va yuk mashinalari"]] },
+    { id: "usta", icon: "tool", title: "Ustalar katalogi", desc: "Santexnik, elektrik, xolodilnik va qurilish ustalari.", kw: "usta santexnik elektrik xolodilnik qurilish remont payvandchi",
+      items: [["Santexniklar", "Quvur, kran, kanalizatsiya"], ["Elektriklar", "Simlar, rozetka, hisoblagich"], ["Xolodilnik va maishiy texnika", "Ta'mirlash"], ["Qurilish ustalari", "Pardoz, tom, payvand"]] },
+    { id: "ish", icon: "job", title: "Bandlik va vakansiya", desc: "Bo'sh ish o'rinlari va rezyumelar.", kw: "ish vakansiya bandlik rezyume ishchi",
+      items: [["Bo'sh ish o'rinlari", "Tuman korxonalaridan"], ["Rezyumelar", "Ish qidiruvchilar"]] },
+    { id: "favqulodda", icon: "plus", title: "Favqulodda xizmatlar", desc: "Tez yordam 103, 24/7 aptekalar va Open Budget.", kw: "tez yordam 103 102 101 104 apteka dorixona open budget favqulodda",
+      items: [["Tez yordam", "Bepul, kuniga 24 soat", "103"], ["Politsiya", "Tezkor yordam", "102"], ["O't o'chirish", "Yong'in xavfsizligi", "101"], ["Gaz avariya", "Gaz xizmati", "104"], ["24/7 aptekalar", "Tungi dorixonalar ro'yxati"], ["Open Budget", "Ovoz berish va loyihalar"]] }
+  ];
+
+  var grid = document.getElementById("grid");
+  var results = document.getElementById("results");
+  var q = document.getElementById("q");
+  var active = null;
+
+  grid.innerHTML = CATS.map(function (c) {
+    return '<button class="card" type="button" data-id="' + c.id + '" aria-pressed="false">' +
+      '<span class="ico">' + icon(c.icon) + '</span><h3>' + c.title + '</h3><p>' + c.desc + '</p></button>';
+  }).join("");
+
+  function itemHTML(it) {
+    var h = '<li class="item"><b>' + it[0] + '</b><span>' + it[1] + '</span>';
+    if (it[2]) h += '<a class="tel" href="tel:' + it[2] + '">' + it[2] + '</a>';
+    else h += '<span class="tag">Raqamlar botda to\'planmoqda</span>';
+    return h + '</li>';
+  }
+
+  function show(title, items, showAll) {
+    var body = items.length
+      ? '<ul class="list">' + items.map(itemHTML).join("") + '</ul>'
+      : '<p class="empty">Hech narsa topilmadi. <a class="tg" href="#" target="_blank" rel="noopener">Telegram botda so\'rab ko\'ring</a> yoki boshqa so\'z bilan qidiring.</p>';
+    results.innerHTML = '<div class="panel"><div class="panel-head"><h3>' + title + '</h3>' +
+      '<button type="button" id="clear">Yopish</button></div>' + body + '</div>';
+    wireTg();
+    document.getElementById("clear").onclick = reset;
+    results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function mark() {
+    var cards = grid.querySelectorAll(".card");
+    for (var i = 0; i < cards.length; i++) cards[i].setAttribute("aria-pressed", cards[i].dataset.id === active ? "true" : "false");
+  }
+  function reset() { active = null; results.innerHTML = ""; mark(); }
+
+  function openCat(id) {
+    var c = CATS.filter(function (x) { return x.id === id; })[0];
+    if (!c) return;
+    if (active === id) { reset(); return; }
+    active = id; mark();
+    show(c.title, c.items);
+  }
+
+  function norm(s) { return s.toLowerCase().replace(/[‘’`´ʻʼ]/g, "'").trim(); }
+
+  function search(text) {
+    var t = norm(text);
+    if (!t) { reset(); return; }
+    active = null; mark();
+    var words = t.split(/\s+/);
+    var out = [];
+    CATS.forEach(function (c) {
+      var catHay = norm(c.title + " " + c.desc + " " + c.kw);
+      c.items.forEach(function (it) {
+        var hay = norm(it.join(" ")) + " " + catHay;
+        if (words.every(function (w) { return hay.indexOf(w) !== -1; })) out.push(it);
+      });
+    });
+    var seen = {}; out = out.filter(function (it) { var k = it[0]; if (seen[k]) return false; seen[k] = 1; return true; });
+    show("Qidiruv natijalari: " + text.replace(/</g, "&lt;"), out);
+  }
+
+  grid.addEventListener("click", function (e) {
+    var b = e.target.closest(".card"); if (b) openCat(b.dataset.id);
+  });
+  document.getElementById("searchForm").addEventListener("submit", function (e) { e.preventDefault(); search(q.value); });
+  document.querySelectorAll(".chip").forEach(function (b) {
+    b.addEventListener("click", function () { q.value = b.dataset.q; search(b.dataset.q); });
+  });
+  document.querySelectorAll("nav a[data-go]").forEach(function (a) {
+    a.addEventListener("click", function () { var id = a.dataset.go; active = null; setTimeout(function () { openCat(id); }, 0); });
+  });
+
+  function wireTg() { document.querySelectorAll(".tg").forEach(function (a) { a.href = TELEGRAM_URL; }); }
+  wireTg();
+  document.getElementById("contact").textContent = CONTACT;
+</script>
